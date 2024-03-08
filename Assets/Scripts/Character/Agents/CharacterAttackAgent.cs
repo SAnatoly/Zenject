@@ -19,7 +19,6 @@ namespace ShootEmUp
         
         public void Shoot()
         {
-            
             bulletSystem.SpawnBullet(new BulletArgs
             {
                 isPlayer = true,

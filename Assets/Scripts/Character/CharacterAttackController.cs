@@ -11,8 +11,7 @@ namespace ShootEmUp
     {
         private CharacterAttackAgent attackAgent;
         private KeyboardInput input;
-
-
+        
         public CharacterAttackController(CharacterAttackAgent _attackAgent, KeyboardInput _input)
         {
             input = _input;

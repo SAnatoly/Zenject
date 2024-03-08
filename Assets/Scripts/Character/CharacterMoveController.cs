@@ -11,10 +11,8 @@ namespace ShootEmUp
         private CharacterMoveAgent moveAgent;
         private KeyboardInput input;
         
-        
         public  CharacterMoveController(CharacterMoveAgent _moveAgent, KeyboardInput _input)
         {
-            
             this.moveAgent = _moveAgent;
             this.input = _input;
             OnStart();

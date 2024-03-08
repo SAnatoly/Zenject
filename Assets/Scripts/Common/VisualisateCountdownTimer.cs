@@ -14,7 +14,6 @@ namespace ShootEmUp
         {
             timer = _timer;
             text = _text;
-            
             timer.changeTime += UpdateText;
             text.text = timer.GetTime().ToString();
         }
@@ -27,7 +26,6 @@ namespace ShootEmUp
         public void OnStart()
         {
             text.gameObject.SetActive(true);
-         
         }
 
         public void OnPlaying()

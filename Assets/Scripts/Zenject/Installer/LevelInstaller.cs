@@ -78,9 +78,9 @@ using Zenject;
             Container.Bind<EnemyManager>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<EnemyCountdownSpawner>().FromInstance(enemyCountdownSpawner).AsSingle().NonLazy();
             Container.Bind<EnemyPool>().AsSingle().WithArguments(enemyContainer, enemyPrefab).NonLazy();
-            Container.BindInterfacesAndSelfTo<EnemyMoveAgent>().FromComponentInNewPrefab(enemyPrefab).AsCached();
-            Container.BindInterfacesAndSelfTo<EnemyAttackAgent>().FromComponentInNewPrefab(enemyPrefab).AsCached();
             Container.Bind<EnemySpawner>().AsSingle().WithArguments(character.gameObject, enemyPositions, enemyWorldTransform).NonLazy();
+            Container.BindInterfacesAndSelfTo<EnemyMoveController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<EnemyAtackController>().AsSingle().NonLazy();
         }
 
         private void UiBind()

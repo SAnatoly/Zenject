@@ -10,8 +10,8 @@ namespace ShootEmUp
       
         private readonly HashSet<Bullet> activeBullets = new();
         private readonly List<Bullet> cache = new();
-        [SerializeField] BulletSpawner bulletSpawner;
-        [SerializeField] BulletPool bulletPool;
+        private BulletSpawner bulletSpawner;
+        private BulletPool bulletPool;
 
         [Inject]
         public void Construct(BulletSpawner _bulletSpawner, BulletPool _bulletPool)
@@ -55,19 +55,16 @@ namespace ShootEmUp
 
         private void OnBulletCollision(Bullet _bullet, Collision2D _collision)
         {
-           
             RemoveBullet(_bullet);
         }
 
         private void RemoveBullet(Bullet _bullet)
         {
-            
             if (activeBullets.Remove(_bullet))
                 return;
             
             bulletPool.RemoveBullet(_bullet);
             _bullet.OnCollisionEntered -= OnBulletCollision;
-            
         }
     }
 }

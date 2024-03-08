@@ -47,7 +47,6 @@ namespace ShootEmUp
         {
             while (true)
             {
-
                 yield return new WaitForSeconds(waitingSeconds);
                 enemyManager.SpawnEnemy();
             }

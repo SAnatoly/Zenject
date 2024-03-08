@@ -7,21 +7,21 @@ namespace ShootEmUp
 
     public sealed class EnemyManager
     {
-        
         private EnemySpawner enemySpawner;
         private EnemyPool enemyPool;
-        private GameManager manager;
+        private EnemyMoveController enemyMoveController;
+        private EnemyAtackController enemyAtackController;
         private BulletSystem bulletSystem;
-        
         private readonly HashSet<GameObject> activeEnemies = new();
 
         [Inject]
-        public void Construct(EnemySpawner _enemySpawner, EnemyPool _enemyPool, GameManager _gameManager,
-            BulletSystem _bulletSystem)
+        public void Construct(EnemySpawner _enemySpawner, EnemyPool _enemyPool, BulletSystem _bulletSystem,
+            EnemyMoveController _enemyMoveController, EnemyAtackController _enemyAtackController)
         {
             enemySpawner = _enemySpawner;
             enemyPool = _enemyPool;
-            manager = _gameManager;
+            enemyMoveController = _enemyMoveController;
+            enemyAtackController = _enemyAtackController;
             bulletSystem = _bulletSystem;
         }
         
@@ -32,8 +32,8 @@ namespace ShootEmUp
             if (this.activeEnemies.Add(_enemy)) 
             { 
                 _enemy.GetComponent<HitPointsComponent>().hpEmpty += this.Destroyed;
-                manager.AddListener(_enemy.GetComponent<EnemyMoveAgent>());
-                manager.AddListener(_enemy.GetComponent<EnemyAttackAgent>());
+                enemyMoveController.AddAgents(_enemy.GetComponent<EnemyMoveAgent>());
+                enemyAtackController.AddAgents(_enemy.GetComponent<EnemyAttackAgent>());
                 _enemy.GetComponent<EnemyAttackAgent>().GetBulletSystem(bulletSystem);
             }
             
@@ -45,8 +45,8 @@ namespace ShootEmUp
                 _enemy.GetComponent<HitPointsComponent>().hpEmpty -= this.Destroyed;
 
                 enemyPool.RemoveEnemy(_enemy);
-                manager.RemoveListener(_enemy.GetComponent<EnemyMoveAgent>());
-                manager.RemoveListener(_enemy.GetComponent<EnemyAttackAgent>());
+                enemyMoveController.RemoveAgents(_enemy.GetComponent<EnemyMoveAgent>());
+                enemyAtackController.RemoveAgents(_enemy.GetComponent<EnemyAttackAgent>());
             }
         }
 

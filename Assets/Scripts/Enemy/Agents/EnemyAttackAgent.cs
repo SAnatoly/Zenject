@@ -3,23 +3,15 @@ using Zenject;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour,
-        IGameFixedUpdateListener
+    public sealed class EnemyAttackAgent : MonoBehaviour
     {
-       
-
         [SerializeField] private WeaponComponent weaponComponent;
         [SerializeField] private EnemyMoveAgent moveAgent;
         [Inject] private BulletSystem bulletSystem;
-        
         [SerializeField] private BulletConfig config;
-        
         [SerializeField] private float countdown;
-
         private GameObject target;
         private float currentTime;
-
-        
         
         public void SetTarget(GameObject _target)
         {
@@ -37,7 +29,6 @@ namespace ShootEmUp
             var vector = (Vector2) this.target.transform.position - startPosition;
             var direction = vector.normalized;
             
-            
             bulletSystem.SpawnBullet(new BulletArgs
             {
                 isPlayer = false,
@@ -49,7 +40,7 @@ namespace ShootEmUp
             });
         }
 
-        public void OnFixedUpdate(float _deltaTime)
+        public void CanFire()
         {
             if (!this.moveAgent.IsReached)
             {

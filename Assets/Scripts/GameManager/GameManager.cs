@@ -163,6 +163,8 @@ namespace ShootEmUp
             for (int i = 0; i < iFixedUpdateListeners.Count; i++)
             {
                 iFixedUpdateListeners[i].OnFixedUpdate(Time.fixedDeltaTime);
+               
+             
             }
         }
 
